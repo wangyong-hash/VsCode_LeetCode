@@ -6,10 +6,10 @@
 题解：去重，和查出为 null的情况。
 
 解法一： 
-    >select (select distinct salary  from employee order by salary desc limit 1,1)as SecondHighestSalary   -- 查出的数据作为临时表。
+    select (select distinct salary  from employee order by salary desc limit 1,1)as SecondHighestSalary   -- 查出的数据作为临时表。
 
 解法二： 
-    >select (ifnull((select distinct salary  from employee order by salary desc limit 1,1),null))as SecondHighestSalary    -- 添加函数 时间复杂度太高。
+    select (ifnull((select distinct salary  from employee order by salary desc limit 1,1),null))as SecondHighestSalary    -- 添加函数 时间复杂度太高。
 -----------------------------------------------------------------------------------------------------------------------------------------------
 ***********************************************************************************************************************************************
 
@@ -25,22 +25,18 @@
 --  解法一：使用 group by ... having ......
 -- 采用分组找出 字段值 > 2 的字段。
 -- (1) select Email, count(email) from Person group by email 
- `select Email from Person group by email having count(email) > 1; `
+ select Email from Person group by email having count(email) > 1; 
 
 
 -- 解法二： 使用临时表
-`select Email from 
+select Email from 
 (select Email, count(email) num from Person group by email) as temp_table
-where num > 1;`
+where num > 1;
 --------------------------------------------------------------------------------------------------------------------------------------------
+***********************************************************************************************************************************************
 
 
-
-
-
-
-
------------------------------------------------------第二题-----------------------------------------------------------------------------------
+-----------------------------------------------------第三题-----------------------------------------------------------------------------------
 ----------------------------------------------------
     2020年6月18日13:32:21
     某网站包含两个表，Customers 表和 Orders 表。
@@ -51,11 +47,11 @@ where num > 1;`
 -- 解法一：
 -- 查找出 Orders 中不包含 Customers 中id 的数据
 -- 找出orders 表中订单为空的 ID
-/*
+
 select ct.name Customers from Customers ct 
 left join Orders od 
 on ct.id = od.CustomerId where od.CustomerId is null;
-*/
+
 
 -- 解法二：
 -- 使用 not in ... 条件进行判断数据是否在 列表中。
