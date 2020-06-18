@@ -6,10 +6,10 @@
 题解：去重，和查出为 null的情况。
 
 解法一： 
-    select (select distinct salary  from employee order by salary desc limit 1,1)as SecondHighestSalary   -- 查出的数据作为临时表。
+    `select (select distinct salary  from employee order by salary desc limit 1,1)as SecondHighestSalary`   -- 查出的数据作为临时表。
 
 解法二： 
-    select (ifnull((select distinct salary  from employee order by salary desc limit 1,1),null))as SecondHighestSalary    -- 添加函数 时间复杂度太高。
+    `select (ifnull((select distinct salary  from employee order by salary desc limit 1,1),null))as SecondHighestSalary`    -- 添加函数 时间复杂度太高。
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 ***********************************************************************************************************************************************
@@ -26,12 +26,12 @@
 --  解法一：使用 group by ... having ......
 -- 采用分组找出 字段值 > 2 的字段。
 -- (1) select Email, count(email) from Person group by email 
--- select Email from Person group by email having count(email) > 1; 
+ `select Email from Person group by email having count(email) > 1; `
 
 
 -- 解法二： 使用临时表
-select Email from 
+`select Email from 
 (select Email, count(email) num from Person group by email) as temp_table
-where num > 1;
+where num > 1;`
 --------------------------------------------------------------------------------------------------------------------------------------------
 ```
